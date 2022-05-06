@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/runner/networkflows/src/graph/graph.cpp
+graph.hpp
+/home/runner/networkflows/src/graph/graph.hpp
+
+/home/runner/networkflows/src/graph/graph.hpp
+iostream
+-
+
