@@ -37,13 +37,13 @@ void Graph::Add_Edge(const Graph_Type::Vertex& V, const Graph_Type::Vertex& W, c
 	Graph_Type::Edge Tmp = {V, W, Weight, this->Number_Of_Edges++};
 	this->Edges.push_back(Tmp);
 	this->Update_Adjacent_Matrix(V, W, Weight);
-	this->Update_Adjacent_List(this->Edges[this->Number_Of_Edges - 1]);
+	this->Update_Adjacent_List(Tmp);
 	
 	if (Edge_Type == Graph_Type::Edge_Type::Undirected) {
 		Tmp = {W, V, Weight, this->Number_Of_Edges++};
 		this->Edges.push_back(Tmp);
 		this->Update_Adjacent_Matrix(W, V, Weight);
-		this->Update_Adjacent_List(this->Edges[this->Number_Of_Edges - 1]);		
+		this->Update_Adjacent_List(Tmp);		
 	}
 } //Add_Edge
 
@@ -70,6 +70,7 @@ void Graph::Print_Adjacent_List() const {
 		std::cout << Vertex_V;
 		for (int Vertex_W = 0; Vertex_W < this->Adjacent_List[Vertex_V].size(); Vertex_W++) {
 			Graph_Type::Vertex V = this->Adjacent_List[Vertex_V][Vertex_W];
+			
 		std::cout << " - [" << this->Adjacent_Matrix[Vertex_V][this->Adjacent_List[Vertex_V][Vertex_W]] << "] -> " << this->Adjacent_List[Vertex_V][Vertex_W];		 
 		}	
 		std::cout << std::endl;
