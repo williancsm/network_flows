@@ -2,5 +2,4 @@
 replit.nix
 .ccls-cache
 *.d
-./build/*
-./build
+build
