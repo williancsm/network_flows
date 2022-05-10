@@ -5,29 +5,53 @@
 *
 */
 
-#ifndef GPRAH_LIBRARY
-#define GPRAH_LIBRARY
+#ifndef GPRAH
+#define GPRAH
 
-#include <iostream>
+#include "graph_types.hpp"
+#include <cassert>
 
-namespace Graph_Library {
+namespace Graph {
 
 class Graph {
 
 public:
 	//Constructor
-	Graph();
+	Graph(const int &V);
 
 	//Method
-	int Get_Number_Of_Vertices();
-	int Get_Number_Of_Edges();
+	int Get_Number_Of_Vertices() const;
+	int Get_Number_Of_Edges() const;
+	const Graph_Type::Edge& Get_Edge(int Index) const;
+
+	void Add_Edge(const Graph_Type::Vertex& V, const Graph_Type::Vertex& W, const double& Weight = 0.0, const Graph_Type::Edge_Type::Enum& Edge_Type = Graph_Type::Edge_Type::Directed);
+
+	void Add_Edge(const Graph_Type::Edge& Edge, const double& Weight = 0.0, const Graph_Type::Edge_Type::Enum& Edge_Type = Graph_Type::Edge_Type::Directed);
+
+	void Print_Adjacent_List() const;
+
+	
 
 private:
-	int Number_Of_Vertices;
-	int Number_Of_Edges;
+
+	unsigned int Number_Of_Vertices;
+	unsigned int Number_Of_Edges;
+
+
+	Graph_Type::Matrix<double> Adjacent_Matrix;
+	Graph_Type::Matrix<Graph_Type::Vertex> Adjacent_List;
+
+	Graph_Type::Array<Graph_Type::Edge> Edges;
+
+	void Increment_Number_Of_Edges();
+
+	void Update_Adjacent_Matrix(const Graph_Type::Vertex& V, const Graph_Type::Vertex& W, const double& Weight);
+	void Update_Adjacent_List(const Graph_Type::Edge& Edge);
+
+	Graph();
 
 };
 
-} //Graph_Library
+} //Graph
 
-#endif //GPRAH_LIBRARY
+#endif //GPRAH
