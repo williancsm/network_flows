@@ -37,6 +37,10 @@ int main(void) {
 	cout << "Edges: " << My_Graph.Get_Number_Of_Edges() << endl;
   cout << "Adjacent List: " << endl;
 	My_Graph.Print_Adjacent_List();
+
+	Algorithms::Dijkstra::Dijkstra My_Dijkstra(My_Graph, 4, 0);
+	My_Dijkstra.Start();
+	My_Dijkstra.Print_Path();
 	
 
 	return 0;
