@@ -8,7 +8,7 @@
 #ifndef GPRAH
 #define GPRAH
 
-#include "graph_types.hpp"
+#include "graph_type.hpp"
 #include <cassert>
 
 namespace Graph {
@@ -28,6 +28,9 @@ public:
 
 	void Add_Edge(const Graph_Type::Edge& Edge, const double& Weight = 0.0, const Graph_Type::Edge_Type::Enum& Edge_Type = Graph_Type::Edge_Type::Directed);
 
+	const std::vector<Graph_Type::Vertex>& Get_Adjacent_List_Of_Vertex(const Graph_Type::Vertex& Vertex) const;
+	const double& Get_Adjacent_Maxtrix_Of_Edge(const Graph_Type::Vertex& V, const Graph_Type::Vertex& W) const;
+
 	void Print_Adjacent_List() const;
 
 	
@@ -44,6 +47,7 @@ private:
 	Graph_Type::Array<Graph_Type::Edge> Edges;
 
 	void Increment_Number_Of_Edges();
+	
 
 	void Update_Adjacent_Matrix(const Graph_Type::Vertex& V, const Graph_Type::Vertex& W, const double& Weight);
 	void Update_Adjacent_List(const Graph_Type::Edge& Edge);

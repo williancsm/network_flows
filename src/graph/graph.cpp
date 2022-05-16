@@ -77,4 +77,13 @@ void Graph::Print_Adjacent_List() const {
 	}	
 } //Print_Adjacent_List
 
+const std::vector<Graph_Type::Vertex>& Graph::Get_Adjacent_List_Of_Vertex(const Graph_Type::Vertex& Vertex) const {
+	for (int i = 0; i < Adjacent_List[Vertex].size(); i++)
+	return this->Adjacent_List[Vertex];
+} //Get_Adjacent_List_Of_Vertex
+
+const double& Graph::Get_Adjacent_Maxtrix_Of_Edge(const Graph_Type::Vertex& V, const Graph_Type::Vertex& W) const {
+	return this->Adjacent_Matrix[V][W];
+} //Get_Adjacent_Maxtrix_Of_Edge
+
 } //Graph
