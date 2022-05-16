@@ -8,7 +8,7 @@
 #include "dijkstra.hpp"
 
 #include <stdio.h>
-#include <set>
+#include <queue>
 
 #include <sstream>
 
@@ -26,18 +26,52 @@ Dijkstra::Dijkstra(const Graph::Graph& Graph, const Graph::Graph_Type::Vertex& I
 		Vertex_Data[Init].Predecessor = Init;
 } //Dijkstra
 
+
+void Dijkstra::Start_2() {
+    int Number_Of_Vertices = Graph.Get_Number_Of_Vertices();
+	
+    using My_Data = std::pair<double, Graph::Graph_Type::Vertex>;
+    std::priority_queue<My_Data, std::vector<My_Data>, std::greater<My_Data>> S_Bar;
+	Graph::Graph_Type::Vertex V = this->Initial_Vertex;	
+    S_Bar.push({0.0, V});
+    while (!S_Bar.empty()) {
+        V = S_Bar.top().second;
+        double Distance = S_Bar.top().first;
+        S_Bar.pop();
+        if (Distance != Vertex_Data[V].Weight)
+            continue;
+
+				const std::vector<Graph::Graph_Type::Vertex>& List = Graph.Get_Adjacent_List_Of_Vertex(V);		
+
+		for (int Idx = 0; Idx < List.size(); Idx++) {					
+			
+			const Graph::Graph_Type::Vertex& W = List[Idx];
+
+			const double& Weight = Graph.Get_Adjacent_Maxtrix_Of_Edge(V, W);	
+
+			const double Total_Weight = (Vertex_Data[V].Weight + Weight);				
+			if (Total_Weight < Vertex_Data[W].Weight) {
+				Vertex_Data[W].Weight = Total_Weight;		
+				Vertex_Data[W].Predecessor = V;
+				S_Bar.push({Vertex_Data[W].Weight, W});
+			}				
+			}	
+
+    }
+}
+
+
+
+
 void Dijkstra::Start() {
 	int Number_Of_Vertices = Graph.Get_Number_Of_Vertices();
+	int Number_Of_Visited_Vertices = 0;
 	
-	std::vector<Graph::Graph_Type::Vertex> S_Bar;
+	std::vector<Graph::Graph_Type::Vertex> S_Bar;	
 	for (int Idx = 0; Idx < Number_Of_Vertices; Idx++) S_Bar.push_back(Idx);
-	
-	std::vector<Graph::Graph_Type::Vertex> S;	
 	Graph::Graph_Type::Vertex V = 0;	
-
 	
-		
-	while (S.size() < Number_Of_Vertices) {
+	while (Number_Of_Visited_Vertices < Number_Of_Vertices) {
 
 		double Min_Weight = INFINITY;
 		std::vector<Graph::Graph_Type::Vertex>::iterator V_It = S_Bar.begin();
@@ -50,7 +84,7 @@ void Dijkstra::Start() {
 			}
 		}
 		S_Bar.erase(V_It);
-		S.push_back(V);
+		Number_Of_Visited_Vertices++;
 
 		const std::vector<Graph::Graph_Type::Vertex>& List = Graph.Get_Adjacent_List_Of_Vertex(V);		
 
@@ -65,18 +99,8 @@ void Dijkstra::Start() {
 				Vertex_Data[W].Weight = Total_Weight;		
 				Vertex_Data[W].Predecessor = V;
 			}				
-			
-
-			
-				//	getchar();				
-		//std::cout << "From: " << V << " " << " To: " << W << " Precessor " << Vertex_Data[W].Predecessor << " [" << Vertex_Data[W].Weight << "] "<< std::endl;
 			}	
-		
-			
 		}
-		//std::cout << "] " << " Next: " << Next_Vertex << " ";
-
-	
 } //Start
 
 void Dijkstra::Print_Dijkstra_Data() const {
@@ -104,7 +128,7 @@ Output.insert(0, Tmp.str());
 	std::cout << Output << std::endl;
 
 	
-}//Print_Path
+} //Print_Path
 
 } //Dijkstra
 } //Algorithms

@@ -27,6 +27,7 @@ struct Vertex_Data {
  double Weight;
  Graph::Graph_Type::Vertex Next;
  Graph::Graph_Type::Vertex Predecessor; 
+ unsigned int Index; 
 
 };
 

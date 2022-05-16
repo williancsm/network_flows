@@ -39,8 +39,10 @@ int main(void) {
 	My_Graph.Print_Adjacent_List();
 
 	Algorithms::Dijkstra::Dijkstra My_Dijkstra(My_Graph, 4, 0);
-	My_Dijkstra.Start();
+	My_Dijkstra.Start_2();
 	My_Dijkstra.Print_Path();
+
+
 	
 
 	return 0;
