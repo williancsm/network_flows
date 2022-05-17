@@ -23,17 +23,13 @@ Visited
 } //Vertex_Status
 
 struct Vertex_Data {
- Vertex_Status::Enum Status;
  double Weight;
- Graph::Graph_Type::Vertex Next;
  Graph::Graph_Type::Vertex Predecessor; 
- unsigned int Index; 
-
 };
 
 
 
-const Vertex_Data Default_Data = {Vertex_Status::Unvisited, INFINITY, 0, 0};
+const Vertex_Data Default_Data = {INFINITY, -1};
 
 } //Algorithms
 } //Dijkstra
