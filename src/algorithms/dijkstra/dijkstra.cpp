@@ -7,12 +7,7 @@
 
 #include "dijkstra.hpp"
 
-#include <stdio.h>
 #include <queue>
-
-#include <sstream>
-
-
 
 namespace Algorithms {
 namespace Dijkstra {
@@ -112,15 +107,13 @@ for (int Idx = 0; Idx < Vertex_Data.size(); Idx++)
 void Dijkstra::Print_Path() const {
 	std::cout << "Dijkstra Path" << std::endl;
 	Graph::Graph_Type::Vertex V = this->End_Vertex;
-	std::string Output = "";
-	std::stringstream Tmp("", std::ios_base::app | std::ios_base::out);
-
-
+	std::string Output;
+	std::string Tmp;
+	
 	
  while (V != this->Initial_Vertex) {
-	Tmp << " -> " << V << " [" << Vertex_Data[V].Weight << "]";
-Output.insert(0, Tmp.str());
-	Tmp.str(std::string());
+	Tmp = " -> " + std::to_string(V) + " [" + std::to_string(Vertex_Data[V].Weight) + "]";
+Output.insert(0, Tmp);
 	V = Vertex_Data[V].Predecessor;
 	} 
 
