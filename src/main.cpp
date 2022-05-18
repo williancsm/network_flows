@@ -10,9 +10,18 @@
 #include "graph.hpp"
 #include "dijkstra.hpp"
 
+#include "ortools/linear_solver/linear_solver.h"
+
 using namespace std;
 
 int main(void) {	
+
+std::unique_ptr<operations_research::MPSolver> solver(operations_research::MPSolver::CreateSolver("SCIP"));
+if (!solver) {
+  LOG(WARNING) << "SCIP solver unavailable.";
+  return 0;
+}
+	
 	//https://www.geeksforgeeks.org/wp-content/uploads/Fig-11.jpg
 	int V = 9;
 	Graph::Graph My_Graph(V);
